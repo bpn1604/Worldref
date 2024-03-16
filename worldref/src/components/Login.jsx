@@ -1,5 +1,5 @@
 import { React , useState } from "react";
-import { useHistory, useNavigation } from 'react-router-dom';
+import { Navigate, useHistory, useNavigation } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { Singleproduct } from "./Singleproduct";
 
 
 
@@ -24,30 +25,46 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
-  
+  const [auth , setAuth] = useState(false)
+  const data = JSON.parse(localStorage.getItem('data')) 
+  console.log(data,'data')
+  // const handleSignup = () => {
+  //   // Your signup logic goes here
+  //   // For demonstration, just show a toast message
 
-  const handleSignup = () => {
-    // Your signup logic goes here
-    // For demonstration, just show a toast message
-    toast({
-      title: 'Sign Up',
-      description: `Signing up with email: ${email} and password: ${password}`,
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    });
-  };
+  //   toast({
+  //     title: 'Sign Up',
+  //     description: `Signing up with email: ${email} and password: ${password}`,
+  //     status: 'success',
+  //     duration: 5000,
+  //     isClosable: true,
+  //   });
+  // };
 
   const handleLogin = () => {
-    // Your login logic goes here
-    // For demonstration, just show a toast message
-    toast({
-      title: 'Login',
-      description: `Logging in with email: ${email} and password: ${password}`,
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    });
+    
+    if(data && data.email === email && data && data.password === password) {
+      toast({
+        title: 'Login',
+        description: `Logging in with email: ${email} and password: ${password}`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      setAuth(true)
+      window.location.href = "/"
+      
+      localStorage.setItem('auth' , JSON.stringify(auth))
+    }else {
+      toast({
+        title: 'Login',
+        description: `Invalid creds`,
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    
     
   };
 
@@ -77,15 +94,16 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
-        <Button colorScheme="teal" onClick={handleSignup}>
+        {/* <Button colorScheme="teal" onClick={handleSignup}>
           Sign Up
-        </Button>
-        <Text textAlign="center">or</Text>
+        </Button> */}
+        {/* <Text textAlign="center">or</Text> */}
         <Button colorScheme="blue" onClick={handleLogin}>
           Login
         </Button>
       </Stack>
     </Container>
+    
     </>
   );
 };

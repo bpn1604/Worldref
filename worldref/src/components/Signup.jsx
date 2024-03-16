@@ -13,15 +13,16 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import Navbar from './Navbar';
+import { json } from 'react-router-dom';
 
 export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
-
+    console.log(email,password)
   const handleSignup = () => {
-    // Your signup logic goes here
-    // For demonstration, just show a toast message
+    const data = {email:email,password:password}
+    localStorage.setItem("data",JSON.stringify(data))
     toast({
       title: 'Sign Up',
       description: `Signing up with email: ${email} and password: ${password}`,
@@ -29,18 +30,13 @@ export const Signup = () => {
       duration: 5000,
       isClosable: true,
     });
+    window.location.href = "/login"
   };
 
   const handleLogin = () => {
     // Your login logic goes here
     // For demonstration, just show a toast message
-    toast({
-      title: 'Login',
-      description: `Logging in with email: ${email} and password: ${password}`,
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    });
+    window.location.href = "/login"
   };
 
   return (

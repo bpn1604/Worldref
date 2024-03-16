@@ -3,7 +3,7 @@ import React from "react";
 
 export function Singleproduct({products}) {
     //console.log(el)
-
+    const isAuth = localStorage.getItem('auth') || false
     return (
       <Flex flexWrap="wrap">
       {products.map((item, index) => (
@@ -15,10 +15,12 @@ export function Singleproduct({products}) {
                 <Text fontSize="xl" fontWeight="bold" mb={2}>{item.title}</Text>
                 <Text fontSize="md" mb={4} overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">{item.description}</Text>
               </Box>
-              <Flex justifyContent="space-between">
+              {
+                isAuth &&  <Flex justifyContent="space-between">
                 <Button colorScheme="teal">Button 1</Button>
                 <Button colorScheme="blue">Button 2</Button>
-              </Flex>
+              </Flex>  
+              }
             </Box>
           </Box>
         </Box>

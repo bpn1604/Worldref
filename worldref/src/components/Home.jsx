@@ -9,6 +9,18 @@ export const Home = () => {
         axios.get("https://fakestoreapi.com/products")
         .then((res)=>setProducts(res.data))
     },[])
+    useEffect(() => {
+      window.addEventListener('beforeunload', () => {
+        localStorage.clear();
+      });
+  
+      // Cleanup the event listener when the component is unmounted
+      return () => {
+        window.removeEventListener('beforeunload', () => {
+          localStorage.clear();
+        });
+      };
+    }, []); 
   return (
     <>
     <Navbar />
