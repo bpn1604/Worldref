@@ -42,7 +42,9 @@ const Login = () => {
   //     isClosable: true,
   //   });
   // };
-
+  const handleLogout = () => {
+    setAuth(false)
+  }
   const handleLogin = () => {
     data && data.forEach((el)=>{
       if(el.email === email && el.password === password) {
@@ -125,7 +127,7 @@ const Login = () => {
         {/* <Text textAlign="center">or</Text> */}
         {
           
-          auth === 'true' ? <Button colorScheme="blue" onClick={handleLogin}>
+          auth === 'true' ? <Button colorScheme="blue" onClick={handleLogout}>
           Logout
         </Button> : <Button colorScheme="blue" onClick={handleLogin}>
           Login
