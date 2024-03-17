@@ -26,7 +26,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const toast = useToast();
   const [auth , setAuth] = useState(false)
+
   const data = JSON.parse(localStorage.getItem('data')) 
+  const isAuth = JSON.parse(localStorage.getItem('auth'))
   console.log(data,'data')
   // const handleSignup = () => {
   //   // Your signup logic goes here
@@ -42,28 +44,51 @@ const Login = () => {
   // };
 
   const handleLogin = () => {
+    data && data.forEach((el)=>{
+      if(el.email === email && el.password === password) {
+        toast({
+          title: 'Login',
+          description: `Logging in with email: ${email} and password: ${password}`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        setAuth(true)
+        window.location.href = "/"
+        
+        localStorage.setItem('auth' , true)
+        return 
+      }
+    })
     
-    if(data && data.email === email && data && data.password === password) {
-      toast({
-        title: 'Login',
-        description: `Logging in with email: ${email} and password: ${password}`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-      setAuth(true)
-      window.location.href = "/"
+    // if(data && data.email === email && data && data.password === password) {
+    //   toast({
+    //     title: 'Login',
+    //     description: `Logging in with email: ${email} and password: ${password}`,
+    //     status: 'success',
+    //     duration: 5000,
+    //     isClosable: true,
+    //   });
+    //   setAuth(true)
+    //   window.location.href = "/"
       
-      localStorage.setItem('auth' , JSON.stringify(auth))
-    }else {
-      toast({
-        title: 'Login',
-        description: `Invalid creds`,
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-      });
-    }
+    //   localStorage.setItem('auth' , JSON.stringify(auth))
+    // }else {
+    //   toast({
+    //     title: 'Login',
+    //     description: `Invalid creds`,
+    //     status: 'warning',
+    //     duration: 5000,
+    //     isClosable: true,
+    //   });
+    // }
+    toast({
+          title: 'Login',
+          description: `Invalid creds`,
+          status: 'warning',
+          duration: 5000,
+          isClosable: true,
+        });
     
     
   };
@@ -98,9 +123,15 @@ const Login = () => {
           Sign Up
         </Button> */}
         {/* <Text textAlign="center">or</Text> */}
-        <Button colorScheme="blue" onClick={handleLogin}>
+        {
+          
+          auth === 'true' ? <Button colorScheme="blue" onClick={handleLogin}>
+          Logout
+        </Button> : <Button colorScheme="blue" onClick={handleLogin}>
           Login
         </Button>
+        }
+        
       </Stack>
     </Container>
     

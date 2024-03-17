@@ -4,6 +4,7 @@ import React from "react";
 export function Singleproduct({products}) {
     //console.log(el)
     const isAuth = localStorage.getItem('auth') || false
+    console.log(isAuth)
     return (
       <Flex flexWrap="wrap">
       {products.map((item, index) => (
@@ -17,8 +18,8 @@ export function Singleproduct({products}) {
               </Box>
               {
                 isAuth &&  <Flex justifyContent="space-between">
-                <Button colorScheme="teal">Button 1</Button>
-                <Button colorScheme="blue">Button 2</Button>
+                <Button colorScheme="teal">Add to Cart</Button>
+                <Button colorScheme="blue">Check Details</Button>
               </Flex>  
               }
             </Box>

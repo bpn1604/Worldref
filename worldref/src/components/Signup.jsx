@@ -21,8 +21,10 @@ export const Signup = () => {
   const toast = useToast();
     console.log(email,password)
   const handleSignup = () => {
+    let localdata = JSON.parse(localStorage.getItem('data')) || []
     const data = {email:email,password:password}
-    localStorage.setItem("data",JSON.stringify(data))
+    localdata = [...localdata ,data]
+    localStorage.setItem("data",JSON.stringify(localdata))
     toast({
       title: 'Sign Up',
       description: `Signing up with email: ${email} and password: ${password}`,

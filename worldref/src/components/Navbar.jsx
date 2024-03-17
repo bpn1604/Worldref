@@ -5,6 +5,7 @@ import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isAuth = JSON.parse(localStorage.getItem('auth'))
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -12,8 +13,10 @@ const Navbar = () => {
         
         
       <Link href='/'>Home</Link>
-        
-        <Link href='/login'>Login</Link>
+        {
+          isAuth == true ? <Link href='/login'>Logout</Link> : <Link href='/login'>Login</Link>
+        }
+        {/* <Link href='/login'>Login</Link> */}
         <Link href='/signup'>Signup</Link>
         <Flex alignItems='center'>
           <IconButton
