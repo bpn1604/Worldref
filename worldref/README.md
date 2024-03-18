@@ -1,3 +1,8 @@
+I have build this app using react.
+For css I have used tailwind and chakra UI .
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
